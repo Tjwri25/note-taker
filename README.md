@@ -1,7 +1,7 @@
 # note-taker
 
 ## Link to deployed app 
-View this app on Heroku [Here]("https://tw-note-taker.herokuapp.com/")
+View this app on Heroku [Here](https://tw-note-taker.herokuapp.com/)
 
 ## Description
 A simple note taker app that allows you to add and save notes, quickly and easily. 
@@ -20,3 +20,4 @@ SO THAT I can organize my thoughts and keep track of tasks I need to complete
 * Express
  
 ## Screenshot 
+![screenshot](https://user-images.githubusercontent.com/74884495/120401426-ec37c080-c30d-11eb-946d-4f62ad033ce4.png)
