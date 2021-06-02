@@ -1,29 +1,36 @@
-const router = require('express').Router();
-// const store = require('../db/store');
+const path = require('path');
+const noteData = require('../db/db');
+const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
 
+module.exports = (app) => {
 
-router.get('/notes', (req, res) => {
-  store
-    .getNotes()
-    .then((notes) => {
-      return res.json(notes);
+    app.post('/api/notes', (req, res) => {
+        req.body.id = uuidv4()
+
+        noteData.push(req.body)
+        fs.readFile((__dirname + '/../db/db.json'), 'utf8', (err, data) => {
+            if (err) {
+                console.error(err)
+                return
+            }
+            fs.writeFile((__dirname + '/../db/db.json'), JSON.stringify(noteData), err => {
+                if (err) {
+                    console.error(err)
+                    return
+                }
+            })
+        })
+        res.json(noteData);
     })
-    .catch((err) => res.status(500).json(err));
-});
 
-router.post('/notes', (req, res) => {
-  store
-    .addNote(req.body)
-    .then((note) => res.json(note))
-    .catch((err) => res.status(500).json(err));
-});
+    app.get('/api/notes', (req, res) => {
+        res.json(noteData)
+    });
 
+    app.delete('/api/notes', (req, res) => {
+        console.log(req);
+        res.json(noteData)
+    })
 
-router.delete('/notes/:id', (req, res) => {
-  store
-    .removeNote(req.params.id)
-    .then(() => res.json({ ok: true }))
-    .catch((err) => res.status(500).json(err));
-});
-
-module.exports = router;
+};
