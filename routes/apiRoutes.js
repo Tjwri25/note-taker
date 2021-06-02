@@ -29,7 +29,7 @@ module.exports = (app) => {
         res.json(notes)
     });
 
-    app.delete('/api/notes', (req, res) => {
+    app.delete('/api/notes/:id', (req, res) => {
         console.log(req);
         res.json(notes)
     })
